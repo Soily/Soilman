@@ -1,0 +1,226 @@
+git clone <url> --branch <branch> --single-branch [<folder>]
+
+    z: Compress archive using gzip program
+    -c: Create archive
+    -v: Verbose i.e display progress while creating archive
+    -f: Archive File name
+
+For example, you have directory called /home/jerry/prog and you would like to compress this directory then you can type tar command as follows:
+$ tar -zcvf prog-1-jan-2005.tar.gz /home/jerry/prog
+
+bz.Ordner mit option -xaf
+gz.Ordner mit option -xzf
+
+sudo mount -t nfs 192.168.178.62:/mnt/HD/HD_a2/nfs ~/dlink-nas/
+
+
+--QT Target Path --
+target.files = Wandy
+target.path = /home/root
+INSTALLS +=target
+
+
+### old
+./configure -opensource -confirm-license -make libs -device imx6 \
+-device-option CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin/arm-fsl-linux-gnueabi- \
+-sysroot <path-to-your-ltib-install>/rootfs -no-gcc-sysroot \
+-prefix /home/QtEmbedded/Compiled
+
+
+### New adapted #####
+
+./configure -opensource -confirm-license -make libs -device linux-imx6-g++ -directfb -eglfs -v \
+-device-option CROSS_COMPILE=/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/dlink-nas/RootFS -no-gcc-sysroot \
+-prefix /home/QtEmbedded/Compiled -optimized-qmake -reduce-relocations -reduce-exports -no-pch
+
+#########################
+
+### New 2 adapted #####
+
+./configure -opensource -confirm-license -make libs -device linux-imx6-g++ -directfb -eglfs -v \
+-device-option CROSS_COMPILE=/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /opt/poky/1.5/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi -no-gcc-sysroot \
+-prefix /home/QtEmbedded/Compiled -optimized-qmake -reduce-relocations -reduce-exports -no-pch
+
+#########################
+
+### New 3 adapted #####
+
+./configure -opensource -confirm-license -make libs -device linux-imx6-g++ -directfb -eglfs -v \
+-device-option CROSS_COMPILE=/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-no-gcc-sysroot -prefix /home/QtEmbedded/Compiled -optimized-qmake -reduce-relocations -reduce-exports -no-pch
+
+#########################
+
+### New 4 adapted #####
+
+./configure -opensource -confirm-license -make libs -device linux-imx6-g++ -directfb -no-xcb -v \
+-device-option CROSS_COMPILE=/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /opt/poky/1.5/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi -no-gcc-sysroot \
+-prefix /home/QtEmbedded/Compiled -optimized-qmake -reduce-relocations -reduce-exports -no-pch
+
+#########################
+
+### New 5 adapted #####
+
+./configure -opensource -confirm-license -icu -make libs -device linux-imx6-g++ -linuxfb -opengl es2 -eglfs -v \
+-device-option CROSS_COMPILE=/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/iMX6_RootFS -no-gcc-sysroot \
+-prefix /home/QtEmbedded/Compiled -no-pch -nomake examples -evdev -no-c++11 -no-xcb
+
+########################
+
+sysroot = /home/linuxdev/dlink-nas/RootFS
+
+CROSS_COMPILE = /opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi-
+
+export QT_SYSROOT=/opt/poky/1.5/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi
+
+export QT_SYSROOT=/home/linuxdev/DevStuff/iMX6_RootFS
+
+export QT_SYSROOT=/home/linuxdev/DevStuff/poky-dora-10.0.0/fsl-community-bsp-platform/build/tmp/sysroots/wandboard-dual
+
+Tutorial:
+Preconditions:
+- Get RootFS from Freescale
+- Extract it to a destination folder which also will be used for Sysroot
+Example:
+--> in shell type in "export QT_SYSROOT=/home/linuxdev/DevStuff/iMX6_RootFS"
+
+make sure the same path is used in configure-command of QT 
+-->
+./configure -opensource -confirm-license -icu -make libs -device linux-imx6-g++ -directfb -opengl es2 -eglfs -v \
+-device-option CROSS_COMPILE=/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/iMX6_RootFS -no-gcc-sysroot \
+-prefix /home/QtEmbedded/Compiled -no-pch -nomake examples -evdev -no-c++11 -no-xcb -no-sql-sqlite
+
+1. Set QT_SYSROOT as above
+2. Extract qt-everywhere-source to MyQTEmbeddedFolder
+3. Add DISTRO_OPTS += hard-float to mkspecs (mkspecs/devices/linux-imx6-g++) /otherwise I get stub-soft.h errors
+4. Do Configure with the settings above. Replace CROSS_COMPILE= with the path of your cross-compiler
+5. make -j 4
+6. sudo make install
+
+
+
+#### Debug Stuff ####
+
+
+/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/ld: cannot find /lib/libc.so.6
+/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/ld: cannot find /usr/lib/libc_nonshared.a
+/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/ld: cannot find /lib/ld-linux-armhf.so.3
+
+ke[5]: Für das Ziel »first« ist nichts zu tun.
+make[5]: Verlasse Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/src/plugins/qmltooling/qmldbg_tcp_qtquick1'
+make[5]: Betrete Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/src/plugins/qmltooling/qmldbg_inspector'
+make[5]: Für das Ziel »first« ist nichts zu tun.
+make[5]: Verlasse Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/src/plugins/qmltooling/qmldbg_inspector'
+make[4]: Verlasse Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/src/plugins/qmltooling'
+make[3]: Verlasse Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/src/plugins'
+make[2]: Verlasse Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/src'
+cd tools/ && ( test -e Makefile || /home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtbase/bin/qmake /home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/tools/tools.pro -o Makefile ) && make -f Makefile 
+make[2]: Betrete Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/tools'
+make[2]: Für das Ziel »first« ist nichts zu tun.
+make[2]: Verlasse Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1/tools'
+make[1]: Verlasse Verzeichnis '/home/linuxdev/QtEmbedded/qt-everywhere-opensource-src-5.2.0/qtquick1'
+linuxdev@linuxdev-P5Q:~/QtEmbedded/qt-everywhere-opensource-src-5.2.0$ ^C
+
+
+##########################
+
+
+./configure -v -opensource -confirm-license -no-pch -no-xcb -no-opengl -opengl es2  \
+-make libs -device imx6 \
+-compile-examples \
+-device-option CROSS_COMPILE=/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/iMX6_RootFS -no-gcc-sysroot \
+-prefix /home/QtEmbedded/Compiled -no-sql-sqlite
+
+
+#########
+
+export PATH=$PATH:/opt/poky/1.5/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi
+
+export PATH=$PATH:/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi
+
+export QT_SYSROOT=/home/linuxdev/DevStuff/poky-dora-10.0.0/fsl-community-bsp-platform/build/tmp/sysroots/wandboard-dual
+
+
+New Tutorial
+
+1. Set bitbaked Yocto meta-toolchain cross compiler to PATH --> 
+export PATH=$PATH:/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi
+
+2. Extract QT to a folder
+
+3. cd into that folder
+
+4. Add hardfloat option to mkspec of qtbase/mkspecs/devices/linux-imx6-g++/qmake.conf 
+--> DISTRO_OPTS += hard-float
+--> IMX6_CFLAGS = ... (add after existing parameters) -mfloat-abi=hard
+
+5. Configure Qt with the following options in case of platform eglfs (Open GL ES) -->
+- make sure that you set up the CROSS_COMPILE variable to the newly bitbaked cross-compiler and the sysroot to a proper rootfs of your target
+in my case I took the wandboard-dual sysroot which was created during an image-build of yocto and can be found under yocto build /tmp/sysroots/[target e.g. wandboard-dual]
+
+./configure -v -dont-process -opensource -confirm-license -device imx6 -device-option \
+CROSS_COMPILE=/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/poky-dora-10.0.0/fsl-community-bsp-platform/build/tmp/sysroots/wandboard-dual \
+-prefix ~/qt5.2arm -shared -no-pch -no-rpath -pkg-config -platform linux-g++ \
+-no-accessibility -no-dbus -no-icu -no-directfb -evdev -no-fontconfig -no-opengl -opengl es2 -eglfs -no-glib -no-gtkstyle -no-iconv -system-libjpeg -no-kms -system-libpng \
+-no-linuxfb -no-mitshm -no-nis -openssl -qt-pcre -release -no-sm -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 \
+-no-sql-tds -nomake tests -tslib -libudev -widgets -no-xcb -no-xcursor -no-xfixes -no-xinerama -no-xinput -no-xinput2 -no-xkb -no-xrandr -no-xrender -no-xshape -no-xsync \
+-no-xvideo -system-zlib 
+
+6. make -j 4 
+7. make install
+
+###############################
+
+New Tutorial 2
+
+1. Set bitbaked Yocto meta-toolchain cross compiler to PATH --> 
+export PATH=$PATH:/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi
+
+2. Extract QT to a folder
+
+3. cd into that folder
+
+4. Add hardfloat option to mkspec of qtbase/mkspecs/devices/linux-imx6-g++/qmake.conf 
+--> DISTRO_OPTS += hard-float
+--> IMX6_CFLAGS = ... (add after existing parameters) -mfloat-abi=hard
+
+5. Configure Qt with the following options in case of platform eglfs (Open GL ES) -->
+- make sure that you set up the CROSS_COMPILE variable to the newly bitbaked cross-compiler and the sysroot to a proper rootfs of your target
+in my case I took the wandboard-dual sysroot which was created during an image-build of yocto and can be found under yocto build /tmp/sysroots/[target e.g. wandboard-dual]
+
+./configure -v -dont-process -opensource -confirm-license -device imx6 -device-option \
+CROSS_COMPILE=/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /mnt/nfs-dev/RootFS \
+-prefix ~/qt5Arm -shared -no-pch -no-rpath -pkg-config -platform linux-g++ \
+-no-accessibility -no-dbus -no-icu -no-directfb -evdev -no-fontconfig -no-opengl -opengl es2 -eglfs -no-glib -no-gtkstyle -no-iconv -system-libjpeg -no-kms -system-libpng \
+-no-linuxfb -no-mitshm -no-nis -openssl -qt-pcre -release -no-sm -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 \
+-no-sql-tds -nomake tests -tslib -libudev -widgets -no-xcb -no-xcursor -no-xfixes -no-xinerama -no-xinput -no-xinput2 -no-xkb -no-xrandr -no-xrender -no-xshape -no-xsync \
+-no-xvideo -system-zlib 
+
+6. make -j 4 
+7. make install
+
+
+######################################
+
+./configure -opengl es2 -device imx6 -device-option \
+CROSS_COMPILE=/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/iMX6_RootFS -opensource -confirm-license -optimized-qmake -reduce-relocations -reduce-exports -release -make libs \
+-prefix ~/qt5arm
+
+./configure -opengl es2 -device imx6 -device-option \
+CROSS_COMPILE=/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/poky-dora-10.0.0/fsl-community-bsp-platform/build/tmp/sysroots/wandboard-dual \
+-opensource -confirm-license -optimized-qmake -reduce-relocations -reduce-exports -release -make libs \
+-prefix ~/qt5arm -no-opengl
+
+
+
+
