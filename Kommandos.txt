@@ -1,3 +1,6 @@
+
+scp -r /home/a/ fibon82@machineB.com:/home/b/
+
 git clone <url> --branch <branch> --single-branch [<folder>]
 
     z: Compress archive using gzip program
