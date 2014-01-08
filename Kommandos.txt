@@ -1,3 +1,5 @@
+scp -r /home/a/ fibon82@machineB.com:/home/b/
+
 git clone <url> --branch <branch> --single-branch [<folder>]
 
     z: Compress archive using gzip program
@@ -221,6 +223,41 @@ CROSS_COMPILE=/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux
 -opensource -confirm-license -optimized-qmake -reduce-relocations -reduce-exports -release -make libs \
 -prefix ~/qt5arm -no-opengl
 
+######
+
+./configure -arch arm -xplatform linux-arm-gnueabi-g++ -opensource -confirm-license -no-pch \
+-nomake examples -nomake tests -no-gtkstyle \
+-qt-zlib -qt-libpng -qt-libjpeg -qt-sql-sqlite -release -prefix /home/soily/qt5new -v
+
+##############
+
+
+./configure -arch arm -xplatform linux-arm-gnueabi-g++ -opensource -confirm-license -no-pch \
+-nomake examples -nomake tests -no-gtkstyle -qt-zlib -qt-libpng -qt-libjpeg -qt-sql-sqlite \
+-release -prefix /home/soily/qt5new -v -no-qpa-platform-guard -no-xcb -no-sql-sqlite
+
+### This configuration worked with Qt 5.2.0 and compiled entirely and I installed the lib on the target,
+### but now I'm getting Qt-App execution errors:
+### This configuration worked with Qt 5.2.0 but now I'm getting Qt-App execution errors:
+
+ERRORS:
+root@wandboard-dual:~# ./QT5_2_0 
+QIconvCodec::convertFromUnicode: using Latin-1 for conversion, iconv_open failed
+QIconvCodec::convertToUnicode: using Latin-1 for conversion, iconv_open failed
+This application failed to start because it could not find or load the Qt platform plugin "xcb".
+
+Reinstalling the application may fix this problem.
+Aborted
+
+#########################################
+
+### next try based on this page -->  http://www.ics.com/blog/building-qt-and-qtwayland-raspberry-pi
+
+./configure -opengl es2 -qpa eglfs -device imx6 \
+-device-option CROSS_COMPILE=/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/poky-dora-10.0.0/fsl-community-bsp-platform/build/tmp/sysroots/wandboard-dual -no-gcc-sysroot \
+-opensource -confirm-license -optimized-qmake -reduce-relocations -reduce-exports -release \
+-nomake tests -prefix /home/soily/qt5new2 -no-pch -skip qttools
 
 
 
