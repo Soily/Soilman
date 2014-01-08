@@ -249,5 +249,15 @@ This application failed to start because it could not find or load the Qt platfo
 Reinstalling the application may fix this problem.
 Aborted
 
+#########################################
+
+### next try based on this page -->  http://www.ics.com/blog/building-qt-and-qtwayland-raspberry-pi
+
+./configure -opengl es2 -qpa eglfs -device imx6 \
+-device-option CROSS_COMPILE=/opt/poky/1.5.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
+-sysroot /home/linuxdev/DevStuff/poky-dora-10.0.0/fsl-community-bsp-platform/build/tmp/sysroots/wandboard-dual -no-gcc-sysroot \
+-opensource -confirm-license -optimized-qmake -reduce-relocations -reduce-exports -release \
+-nomake tests -prefix /home/soily/qt5new2 -no-pch -skip qttools
+
 
 
