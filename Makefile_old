@@ -1,0 +1,35 @@
+CPPUTEST_HOME=/home/linuxdev/DevStuff/TDD/cpputest
+# Add the include path to the Makefile. Something like: 
+CPPFLAGS += -I(CPPUTEST_HOME)/include
+# Add the memory leak macros to you Makefile (needed for additional debug info!). Something like:     
+CXXFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorNewMacros.h
+CFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorMallocMacros.h
+# Add the library linking to your Makefile. Something like:
+LD_LIBRARIES = -L$(CPPUTEST_HOME)/lib -lCppUTest -lCppUTestExt
+#
+
+#This makefile makes all the main book code with CppUTest test harness
+
+#Set this to @ to keep the makefile quiet
+SILENCE = @
+
+#---- Outputs ----#
+COMPONENT_NAME = Stdio_CppUTest
+
+#--- Inputs ----#
+CPP_PLATFORM = Gcc
+PROJECT_HOME_DIR = .
+
+SRC_DIRS = \
+
+TEST_SRC_DIRS = \
+	.\tests\stdio
+	
+INCLUDE_DIRS =\
+  .\
+  $(CPPUTEST_HOME)/include\
+	
+CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror 
+#CPPUTEST_CFLAGS = -std=c89 
+CPPUTEST_CFLAGS += -Wall -Wstrict-prototypes -pedantic
+LD_LIBRARIES = -lpthread
